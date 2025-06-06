@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Livret d'accueil - La Petite Chaume</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: url('background.jpg') no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 360px;
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    p {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .btn {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      font-size: 14px;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .btn i {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: white;
+      color: #111827;
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 360px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+    }
+
+    .modal-content .card {
+      background: #f3f4f6;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+
+    .modal-content .code {
+      font-size: 16px;
+      color: #4b5563;
+    }
+
+    .btn-copy {
+      background: #f43f5e;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 20px;
+      cursor: pointer;
+      color: #555;
+    }
+  </style>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>La Petite Chaume</h1>
+    <p>Chers visiteurs, j’espère que vous passerez un agréable séjour.</p>
+
+    <div class="grid">
+      <a href="javascript:void(0);" onclick="openModal()" class="btn"><i class="fas fa-wifi"></i> wifi</a>
+      <a href="#digicode" class="btn"><i class="fas fa-lock"></i> digicode</a>
+      <a href="javascript:void(0);" onclick="openContactModal()" class="btn"><i class="fas fa-phone"></i> num. utiles</a>
+      <a href="#infos" class="btn"><i class="fas fa-info-circle"></i> infos pratiques</a>
+    </div>
+  </div>
+
+  <!-- Modal Wi-Fi -->
+  <div id="wifiModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Nom du Wi-Fi :</h2>
+      <div class="card">
+        <div class="code" id="wifi-name">SFR_738F</div>
+      </div>
+      <h2>Clé du Wi-Fi :</h2>
+      <div class="card">
+        <div class="code" id="wifi-key">p3tit3ch@um3</div>
+        <button class="btn-copy" onclick="copyToClipboard()">Copier</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal() {
+      document.getElementById("wifiModal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("wifiModal").style.display = "none";
+    }
+
+    function copyToClipboard() {
+      const text = document.getElementById('wifi-key').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Clé Wi-Fi copiée !");
+      });
+    }
+  </script>
+
+<!-- Modal Numéros Utiles -->
+<div id="contactModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeContactModal()">&times;</span>
+    <h2>Numéros Utiles</h2>
+
+    <div class="card">
+      <h3>Mélanie</h3>
+      <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 5px;">
+        <i class="fas fa-phone" style="color: #f59e0b;"></i>
+        <a href="tel:+33761221410" style="text-decoration: none; color: #334155;">+33761221410</a>
+      </div>
+      <div style="font-size: 13px; color: #6b7280;">Propriétaire</div>
+    </div>
+
+    <div class="card">
+      <h3>Benjamin</h3>
+      <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 5px;">
+        <i class="fas fa-phone" style="color: #f59e0b;"></i>
+        <a href="tel:+33630661574" style="text-decoration: none; color: #334155;">+33630661574</a>
+      </div>
+      <div style="font-size: 13px; color: #6b7280;">Propriétaire 2</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openContactModal() {
+    document.getElementById("contactModal").style.display = "flex";
+  }
+
+  function closeContactModal() {
+    document.getElementById("contactModal").style.display = "none";
+  }
+</script>
+
+</body>
+</html>
